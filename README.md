@@ -20,10 +20,9 @@ Exploratory data analysis and a machine learning model that predicts which telec
 8. [Churn Prediction Model](#churn-prediction-model)
 9. [Results](#results)
 10. [How to Run](#how-to-run)
-11. [Using the Saved Model](#using-the-saved-model)
-12. [Key Takeaways](#key-takeaways)
-13. [Future Improvements](#future-improvements)
-14. [Author](#author)
+11. [Key Takeaways](#key-takeaways)
+12. [Future Improvements](#future-improvements)
+13. [Author](#author)
 
 ---
 
@@ -96,113 +95,69 @@ Python, pandas, NumPy, Matplotlib, Seaborn, scikit-learn, joblib
 ## Exploratory Data Analysis
 
 ### What is the distribution of Churn?
-
-![Churn distribution](images/churn_distribution.png)
-
 - A large proportion of customers continue using the service, which suggests relatively strong retention.
 - A significant portion have churned, which points to room for improvement in customer satisfaction or service quality.
 - Reducing churn would lead to better loyalty and more stable revenue.
 
 ### What percentage of customers churned vs. stayed?
-
-![Churn pie chart](images/churn_pie.png)
-
 - **73.5%** of customers have not churned.
 - **26.5%** of customers have churned.
 - The company should work on reducing this 26.5% churn rate.
 
 ### How many customers fall under each contract type?
-
-![Contract type distribution](images/contract_distribution.png)
-
 - Most customers are on **month-to-month** contracts (over 3,000 customers).
 - Far fewer customers have one-year or two-year contracts.
 - Converting month-to-month customers to longer contracts could improve retention.
 
 ### What is the distribution of internet service types?
-
-![Internet service distribution](images/internet_service_distribution.png)
-
-![Internet service pie chart](images/internet_service_pie.png)
-
 - **Fiber optic** is the most popular service (44% of customers).
 - **DSL** is second (34.4%).
 - **21.7%** of customers have no internet service.
 
 ### How is tenure distributed?
-
-![Tenure distribution](images/tenure_distribution.png)
-
 - There is a sharp peak in the 0 to 5 month range, which suggests many customers leave early or are new.
 - Counts are steadier in the 20 to 60 month range.
 - Retention programs aimed at new customers could reduce early churn.
 
 ### What is the distribution of monthly charges?
-
-![Monthly charges distribution](images/monthly_charges_distribution.png)
-
 - There is a large peak near 20 per month, indicating many low-cost plans.
 - The distribution has a long tail of customers with higher charges.
 - Customers could be segmented by pricing tier for tailored retention strategies.
 
 ### What is the distribution of total charges?
-
-![Total charges distribution](images/total_charges_distribution.png)
-
 - Most customers have low total charges (a peak between 0 and 1,000).
 - The distribution is right-skewed: a few customers have much higher total charges.
 - Higher-value customers could be targeted with upsell or retention offers.
 
 ### How does churn vary across contract types?
-
-![Churn vs contract type](images/churn_vs_contract.png)
-
 - **Month-to-month** customers churn the most, since short-term flexibility makes leaving easy.
 - One-year and two-year customers churn far less, so longer commitments help retention.
 
 ### How does churn differ across internet service types?
-
-![Churn vs internet service](images/churn_vs_internet_service.png)
-
 - **Fiber optic** users have the highest churn, which may point to dissatisfaction with the service or its price.
 - **DSL** users churn less.
 - Customer feedback on the fiber optic service is worth investigating.
 
 ### How does churn vary across payment methods?
-
-![Churn vs payment method](images/churn_vs_payment_method.png)
-
 - **Electronic check** users have the highest churn.
 - Customers paying by automatic bank transfer or automatic credit card churn much less.
 - Incentives to switch to automatic payments could reduce churn.
 
 ### Do monthly charges differ between churned and retained customers?
-
-![Monthly charges vs churn](images/monthly_charges_vs_churn.png)
-
 - Churned customers tend to have higher monthly charges.
 - Their charges also show a wider spread.
 - Lower-cost plans or incentives for high-paying customers may help retention.
 
 ### Are customers with dependents less likely to churn?
-
-![Churn vs dependents](images/churn_vs_dependents.png)
-
 - Customers without dependents churn more than customers with dependents.
 - Personalised offers for customers without dependents could help retain them.
 
 ### Are customers without tech support more likely to churn?
-
-![Churn vs tech support](images/churn_vs_tech_support.png)
-
 - Customers **without tech support** are more likely to churn.
 - Customers with tech support tend to stay longer.
 - Offering or improving tech support could reduce churn.
 
 ### How do internet service, monthly charges and churn interact?
-
-![Internet service vs monthly charges vs churn](images/internet_service_vs_monthly_charges_vs_churn.png)
-
 - Fiber optic customers with higher monthly charges churn the most.
 - DSL customers pay less and churn less.
 - Customers without internet service have very low charges and minimal churn.
@@ -220,9 +175,6 @@ Python, pandas, NumPy, Matplotlib, Seaborn, scikit-learn, joblib
 7. **Persistence:** the whole pipeline (preprocessing and model) is saved with joblib.
 
 ## Results
-
-![Confusion matrix and ROC curve](images/evaluation.png)
-
 **Confusion matrix (test set, 1,409 customers, threshold 0.5)**
 
 | | Predicted Stay | Predicted Churn |
@@ -271,22 +223,6 @@ python telecom_customer_churn_analysis.py
 # 6. Train, evaluate and save the model
 python churn_model.py
 ```
-
-## Using the Saved Model
-
-```python
-import joblib
-import pandas as pd
-
-model = joblib.load("churn_model.joblib")
-
-new_customers = pd.read_csv("new_customers.csv")   # same columns as the training data, without Churn
-new_customers["TotalCharges"] = pd.to_numeric(new_customers["TotalCharges"], errors="coerce")
-new_customers = new_customers.drop(columns=["customerID"], errors="ignore")
-
-churn_probability = model.predict_proba(new_customers)[:, 1]
-```
-
 ## Key Takeaways
 
 - **Contract type** is a major factor: month-to-month customers churn far more than customers on one- or two-year contracts.
@@ -306,7 +242,7 @@ churn_probability = model.predict_proba(new_customers)[:, 1]
 ## Author
 
 **Rohith Peddakota**
-B.Tech (AI & Data Science), Miracle Educational Society
+B.Tech (AI & Data Science), Miracle Educational Society Group of Institutions
 
 - GitHub: [RohithPeddakota](https://github.com/RohithPeddakota)
 - LinkedIn: [rohith-peddakota](https://linkedin.com/in/rohith-peddakota-736b54310)
