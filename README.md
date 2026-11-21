@@ -204,8 +204,8 @@ Permutation importance on the test set (the drop in ROC-AUC when a feature is sh
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/RohithPeddakota/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/RohithPeddakota/telecom_customer-churn_Analysis-and-prediction-model.git
+cd telecom_customer-churn_Analysis-and-prediction-model
 
 # 2. (Optional) create a virtual environment
 python -m venv venv
